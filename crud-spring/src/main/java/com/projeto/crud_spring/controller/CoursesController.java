@@ -26,7 +26,22 @@ public class CoursesController {
 //        courseRepository.save(course);
 //        return ResponseEntity.status(201).body().build();
     }
+    @GetMapping(path = {"/{id}"})
+    public ResponseEntity findById(@PathVariable Long id){
+        var course = courseRepository.findById(id).orElse(null);
+        return ResponseEntity.status(200).body(course);
     }
+//    @PutMapping(value = "/{id}")
+//    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Course course){
+//        return ResponseEntity.status(200).body(courseRepository.save(course));
+//    }
+    @DeleteMapping(path = {"/delete/{id}"})
+    public ResponseEntity delete(@PathVariable Long id){
+        courseRepository.deleteById(id);
+        return ResponseEntity.status(204).build();
+    }
+
+}
 
 
 
